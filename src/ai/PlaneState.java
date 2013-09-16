@@ -1,3 +1,5 @@
+package ai;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alexeyk
@@ -12,6 +14,7 @@ public class PlaneState {
     private boolean flipped;
     private int rechargeRemaining;
     private int health;
+
 
     public PlaneState(int x, int y, double angle, boolean flipped, int rechargeRemaining, int health) {
         this.x = x;

@@ -1,3 +1,5 @@
+package ai;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alexeyk
@@ -6,28 +8,24 @@
  * To change this template use File | Settings | File Templates.
  */
 public class EasyAI extends AI {
-    MyBehaviourState myBehaviourState;
-    EnemyBehaviourState enemyBehaviourState;
+    private MyBehaviourState myBehaviourState;
+    private EnemyBehaviourState enemyBehaviourState;
 
 
     public EasyAI() {
-        this.myBehaviourState = MyBehaviourState.IDLE;
+        this.myBehaviourState = new IdleBehaviourState();
         this.enemyBehaviourState = EnemyBehaviourState.VICTIM;
     }
 
     @Override
     public PlaneState act(PlaneState myState, final PlaneState enemyState) {
 //        действуем исходя из текущего состояния поведения
-        if (enemyBehaviourState == EnemyBehaviourState.VICTIM) {
-            if (myBehaviourState == MyBehaviourState.IDLE) {
-                if (isDangerous(enemyState, myState)) {
-                    myBehaviourState = MyBehaviourState.ESCAPE;
-                } else {
-                    myBehaviourState = MyBehaviourState.PURSUIT;
-                }
-            }
-        }
+        this.enemyBehaviourState = getEnemyBehaviourState();
+        return myBehaviourState.act(myState, enemyState, this.enemyBehaviourState);
+    }
 
+    EnemyBehaviourState getEnemyBehaviourState() {
+        throw new NotImplementedException();
     }
 
 
@@ -39,13 +37,5 @@ public class EasyAI extends AI {
     static enum EnemyBehaviourState {
         PREDATOR,
         VICTIM
-    }
-
-    public enum MyBehaviourState {
-        IDLE,
-        PURSUIT,
-        ESCAPE,
-        EVASION,
-        FOLLOW_PRAISE
     }
 }

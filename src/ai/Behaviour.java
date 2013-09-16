@@ -1,3 +1,5 @@
+package ai;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alexeyk
